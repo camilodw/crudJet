@@ -6,6 +6,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
+use app\Http\Requests\task\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -16,7 +17,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks=Task::all();
+        return Inertia::render('task/Index',['tasks' => $tasks]);
     }
 
     /**
@@ -26,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('task/Create');
     }
 
     /**
@@ -35,9 +37,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        Task::create( $request->all() );
+        return Redirect::route( 'task.index' );
+
     }
 
     /**
@@ -48,7 +52,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+
     }
 
     /**
@@ -59,7 +63,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return Inertia::render( 'task/Edit' , ['task' => $task]);
     }
 
     /**
@@ -71,7 +75,8 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $task->update($request->all());
+        return Redirect::route( 'task.index' );
     }
 
     /**
@@ -82,6 +87,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return Redirect::route( 'task.index' );
     }
 }
