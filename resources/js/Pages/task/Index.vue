@@ -9,8 +9,7 @@
           <inertia-link
             :href="route('task.create')"
             class="btn btn-dark"
-            type="button"
-          >
+            type="button">
             Nuevo
           </inertia-link>
         </div>
@@ -25,17 +24,28 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr v-for="task in tasks" :key="task.id">
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.description }}</td>
-                    <td v-if="task.status==1" class="alert bg-success form-control text-center text-white">Active</td>
-                    <td v-if="task.status==0" class="alert bg-danger form-control text-center text-white">inactive</td>
-                    <td><inertia-link
-                                :href="route('task.edit', task.id)"
-                                class="btn btn-warning form-control" type="button">
-                                Edit
-                            </inertia-link></td>
-                  </tr>
+                <tr v-for="task in tasks" :key="task.id">
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.description }}</td>
+                  <td
+                    v-if="task.status == 1"
+                    class="alert bg-success form-control text-center text-white">
+                    Active
+                  </td>
+                  <td
+                    v-if="task.status == 0"
+                    class="alert bg-danger form-control text-center text-white">
+                    Disable
+                  </td>
+                  <td>
+                    <inertia-link
+                      :href="route('task.edit', task.id)"
+                      class="btn btn-warning form-control"
+                      type="button">
+                      Edit
+                    </inertia-link>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -45,19 +55,16 @@
   </app-layout>
 </template>
 <script>
-
 import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-export default(
-    {
-        components: {
-            AppLayout,
-        },
-        props: {
-            tasks: Array,
-        }
-    }
-);
+export default {
+  components: {
+    AppLayout,
+  },
+  props: {
+    tasks: Array,
+  },
+};
 </script>
 
