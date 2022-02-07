@@ -9,15 +9,16 @@
                     <form @submit.prevent="store">
                         <div class="form-group">
                             <label for="" class="form-label">Name:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" v-model="Task.name">
                         </div>
                         <div class="form-group">
                             <label for="" class="form-label">Description:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" v-model="Task.description">
                         </div>
                         <div class="form-group">
                             <label for="" class="form-label">Status:</label>
-                            <button class="btn btn-success form-control">Active</button>
+                            <button class="btn btn-success form-control" v-if="status==true" type="button" v-on:click="toggleStatus">Enabled</button>
+                            <button class="btn btn-danger form-control" v-if="status==false" type="button" v-on:click="toggleStatus">Disabled</button>
                         </div>
                         <div class="text-center mt-4">
                             <button class="btn btn-primary form-control">
@@ -46,20 +47,24 @@ export default(
             return{
                 Task:
                 {
-                name: "" ,
-                description: "",
-                status:true
+                    name: "" ,
+                    description: "",
+                    status:true
                 }
             }
         },
         methods:{
-            store(){
-
+            toggleStatus()
+            {
+                  this.Task.status = !this.game.status;
             }
-
+            ,
+            store()
+            {
+                this.$inertia.post( route( 'task.store' ), this.Task );
+            }
         }
 
     }
 );
-
 </script>
