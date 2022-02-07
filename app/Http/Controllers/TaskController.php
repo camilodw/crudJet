@@ -6,7 +6,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
-use app\Http\Requests\task\TaskRequest;
+use App\Http\Requests\task\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -75,7 +75,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $task->update($request->all());
+        $task->update( $request->all() );
         return Redirect::route( 'task.index' );
     }
 

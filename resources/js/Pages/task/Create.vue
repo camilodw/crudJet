@@ -17,8 +17,8 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="form-label">Status:</label>
-                            <button class="btn btn-success form-control" v-if="status==true" type="button" v-on:click="toggleStatus">Enabled</button>
-                            <button class="btn btn-danger form-control" v-if="status==false" type="button" v-on:click="toggleStatus">Disabled</button>
+                            <button class="btn btn-success form-control" v-if="Task.status==true" type="button" v-on:click="toggleStatus">Enabled</button>
+                            <button class="btn btn-danger form-control" v-if="Task.status==false" type="button" v-on:click="toggleStatus">Disabled</button>
                         </div>
                         <div class="text-center mt-4">
                             <button class="btn btn-primary form-control">
@@ -47,7 +47,7 @@ export default(
             return{
                 Task:
                 {
-                    name: "" ,
+                    name: "",
                     description: "",
                     status:true
                 }
@@ -56,7 +56,7 @@ export default(
         methods:{
             toggleStatus()
             {
-                  this.Task.status = !this.game.status;
+                  this.Task.status = !this.Task.status;
             }
             ,
             store()
@@ -64,7 +64,6 @@ export default(
                 this.$inertia.post( route( 'task.store' ), this.Task );
             }
         }
-
     }
 );
 </script>
